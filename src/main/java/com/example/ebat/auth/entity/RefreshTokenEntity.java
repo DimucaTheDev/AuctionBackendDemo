@@ -1,6 +1,6 @@
 package com.example.ebat.auth.entity;
 
-import ch.qos.logback.core.model.INamedModel;
+import com.example.ebat.user.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,14 +17,14 @@ public class RefreshTokenEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
-    private String refreshToken;
+    @Column(unique = true)
+    private String token;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false)
     private OffsetDateTime expiration;
 
     private String deviceInfo;

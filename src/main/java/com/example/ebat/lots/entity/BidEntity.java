@@ -1,8 +1,7 @@
 package com.example.ebat.lots.entity;
 
-import com.example.ebat.auth.entity.UserEntity;
+import com.example.ebat.user.entity.UserEntity;
 import jakarta.persistence.*;
-import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
 

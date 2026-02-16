@@ -1,6 +1,8 @@
-package com.example.ebat.auth.entity;
+package com.example.ebat.user.entity;
 
+import com.example.ebat.auth.entity.RefreshTokenEntity;
 import com.example.ebat.lots.entity.LotEntity;
+import com.example.ebat.user.UserRole;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,10 +22,13 @@ public class UserEntity {
     private Long id;
 
     @Column(name = "external_id", unique = true, nullable = false, updatable = false)
-    private UUID externalId;
+    private UUID externalId = UUID.randomUUID();
 
     @Column(name = "email", unique = true, nullable = false)
     private String email;
+
+    @Column(name = "shown_name", nullable = false)
+    private String shownName;
 
     @Column(name = "password_hash", nullable = false)
     private String passwordHash;
@@ -40,14 +45,12 @@ public class UserEntity {
     @Column(name = "frozen_balance", nullable = false)
     private BigDecimal frozenBalance = BigDecimal.ZERO;
 
+    @Column(name = "avatar_url")
+    private String avatarUrl;
+
+    private UserRole role;
+
     public BigDecimal getTotalBalance() {
         return availableBalance.add(frozenBalance);
-    }
-
-    @PrePersist
-    protected void onCreate() {
-        if (this.externalId == null) {
-            this.externalId = UUID.randomUUID();
-        }
     }
 }

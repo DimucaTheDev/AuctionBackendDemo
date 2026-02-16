@@ -67,7 +67,6 @@ public class AuthTokenService {
             if (blacklist.containsKey(token)) {
                 return false;
             }
-
             return true;
         } catch (JwtException e) {
             return false;
