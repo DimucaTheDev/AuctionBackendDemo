@@ -3,5 +3,10 @@ package com.example.ebat.auth;
 import com.example.ebat.auth.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public class AuthRepository implements JpaRepository<Long, UserEntity> {
+import java.util.Optional;
+
+public interface AuthRepository extends JpaRepository<UserEntity, Long> {
+
+    Optional<UserEntity> findByEmail(String email);
+
 }

@@ -20,13 +20,16 @@ public class UserEntity {
     private Long id;
 
     @Column(name = "external_id", unique = true, nullable = false, updatable = false)
-    private UUID externalId = UUID.randomUUID();
+    private UUID externalId;
 
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
     @Column(name = "password_hash", nullable = false)
     private String passwordHash;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<RefreshTokenEntity> refreshTokens;
 
     @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<LotEntity> lots;
@@ -39,5 +42,12 @@ public class UserEntity {
 
     public BigDecimal getTotalBalance() {
         return availableBalance.add(frozenBalance);
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        if (this.externalId == null) {
+            this.externalId = UUID.randomUUID();
+        }
     }
 }

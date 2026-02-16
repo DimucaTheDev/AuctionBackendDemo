@@ -5,10 +5,13 @@ import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 
 @Getter
-public class AuthLoginDtoInput {
+public class AuthLoginDto {
 
     @NotEmpty
     @Email
     private String email;
+
+    @NotEmpty
+    private String password;
 
 }

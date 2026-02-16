@@ -1,15 +1,12 @@
 package com.example.ebat.auth.dto.in;
 
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.boot.context.properties.bind.Name;
-import org.springframework.validation.annotation.Validated;
 
 @Getter
-public class AuthRegisterDtoInput {
+public class AuthRegisterDto {
 
     @NotEmpty
     @Length(min = 3, max = 20)
